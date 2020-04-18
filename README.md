@@ -7,3 +7,7 @@ Just another Game.
 - Added Character controller prototype.
 - Lights Baking disabled.
 
+18-04-20 changelog --- 
+- Player Gravity.
+- Push Physics objects.
+- Object weight simulation.
