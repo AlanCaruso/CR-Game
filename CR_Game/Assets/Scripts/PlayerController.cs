@@ -19,10 +19,17 @@ public class PlayerController : MonoBehaviour
     public Camera mainCamera;
     private Vector3 camForward;
     private Vector3 CamRight;
+    public float jumpForce;
+    public Collider coll;
+
+    public float reduction;
+
 
     void Start()
     {
         player = GetComponent<CharacterController>();
+        coll = GetComponent<Collider>();
+        
     }
 
     
@@ -42,11 +49,19 @@ public class PlayerController : MonoBehaviour
         movePlayer = movePlayer * playerSpeed;
 
         player.transform.LookAt(player.transform.position + movePlayer);
-
+    
+        
         SetGravity();
+        playerSkills();
         player.Move(movePlayer * Time.deltaTime);
-
-        Debug.Log(player.velocity.magnitude);
+        // Debug.Log(player.velocity.magnitude);
+        if(player.isGrounded){
+            print("is grounded");
+        }else{
+            print("not grounded");
+        }
+        
+        
     }
     
     void camDirection(){
@@ -59,10 +74,30 @@ public class PlayerController : MonoBehaviour
         camForward = camForward.normalized;
         CamRight = CamRight.normalized;
     }
+
+    // bool Grounded(){
+    //     return Physics.Raycast(transform.position, Vector3.down, coll.bounds.extents.y + 0.1f);
+    // }
+   
+    void playerSkills(){
+        // touchingGround = Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1);
+       
+        // if(Input.GetButtonDown("Jump")){
+        //     if(Grounded()){
+        //         fallVelocity = jumpForce;
+        //          movePlayer.y = fallVelocity;
+        //     }
+        // }
+        if(player.isGrounded && Input.GetButtonDown("Jump")){
+            fallVelocity = jumpForce;
+            movePlayer.y = fallVelocity;
+         }
+    }
+    
     void SetGravity(){
         
         if(player.isGrounded){
-            fallVelocity = -gravity * Time.deltaTime;
+            fallVelocity = (-gravity - reduction) * Time.deltaTime;
             movePlayer.y = fallVelocity;
         }else{
             fallVelocity -= gravity * Time.deltaTime;
