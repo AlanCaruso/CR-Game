@@ -161,6 +161,7 @@ MonoBehaviour:
   gravity: 35
   fallVelocity: 0
   mainCamera: {fileID: 963194227}
+  jumpForce: 10
 --- !u!143 &77321380
 CharacterController:
   m_ObjectHideFlags: 0

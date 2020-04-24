@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 camForward;
     private Vector3 CamRight;
 
+    public float jumpForce;
+
     void Start()
     {
         player = GetComponent<CharacterController>();
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
         player.transform.LookAt(player.transform.position + movePlayer);
 
         SetGravity();
+        playerSkills();
         player.Move(movePlayer * Time.deltaTime);
 
         Debug.Log(player.velocity.magnitude);
@@ -58,6 +61,13 @@ public class PlayerController : MonoBehaviour
 
         camForward = camForward.normalized;
         CamRight = CamRight.normalized;
+    }
+
+    void playerSkills(){
+        if(player.isGrounded && Input.GetButtonDown("Jump")){
+            fallVelocity = jumpForce;
+            movePlayer.y = fallVelocity;
+        }
     }
     void SetGravity(){
         
