@@ -158,10 +158,12 @@ MonoBehaviour:
   verticalMove: 0
   player: {fileID: 0}
   playerSpeed: 7
-  gravity: 35
+  gravity: 70
   fallVelocity: 0
   mainCamera: {fileID: 963194227}
-  jumpForce: 10
+  jumpForce: 15
+  coll: {fileID: 0}
+  reduction: 25
 --- !u!143 &77321380
 CharacterController:
   m_ObjectHideFlags: 0
